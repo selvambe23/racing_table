@@ -1,0 +1,39 @@
+/*
+ * Wp Racing Admin Styles
+ * Styled used for the back-end of the website
+ */
+ 
+.field-container .field{
+	margin-bottom: 10px;
+}
+.field-container label,
+.field-container small,
+.field-container input,
+.field-container textarea{
+	display: block;
+}
+.field-container label{
+	margin-bottom: 3px;
+}
+.field-container small{
+	margin-bottom: 3px;
+}
+.field-container input,
+.field-container textarea{
+	max-width: 300px;
+	width: 100%;
+}
+span#UrlError {
+    color: #fff;
+    margin-top: 6px;
+    display: block;
+    font-size: 12px;
+    background: red;
+    width: 15%;
+    padding: 5px 5px;
+    font-weight: bold;
+    text-align: center;
+}
+span.hide{
+	display: none !important;
+}
