@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
                 if(status === 'success'){
                     var tableData = [];
                     var dom_nodes = $($.parseHTML(response));
-                    var tableRows = dom_nodes.find('#ergebnis tbody tr');
+                    var tableRows = dom_nodes.find('.raceTable table tbody tr');
                     for (i = 0; i < tableRows.length; i++) { 
                         var currentRow = tableRows[i];
                         tableData[i] = {

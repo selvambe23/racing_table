@@ -1,17 +1,17 @@
 <?php
 /*
-Plugin Name: WordPress Get Race Data
-Description: Creates an interfaces to get and manage race datas from other websites.
+Plugin Name: WordPress Horse Details
+Description: Creates an interfaces to get and manage horce datas.
 Version:     1.0.0
 */
 
-class wp_simple_location{
+class wp_simple_horse{
 	
 	public function __construct(){
 
-		add_action('init', array($this,'register_race_data_post_type'));
+		add_action('init', array($this,'register_horse_data_post_type'));
 		add_action('add_meta_boxes', array($this,'add_table_meta_boxes')); //add meta boxes
-		add_action('save_post_wp_race_tables', array($this,'save_race_tables')); //save location
+		add_action('save_post_wp_horse_tables', array($this,'save_horse_tables')); //save location
 		add_action('admin_enqueue_scripts', array($this,'enqueue_admin_scripts_and_styles')); //admin scripts and styles
 		add_action('wp_enqueue_scripts', array($this,'enqueue_public_scripts_and_styles')); //public scripts and styles
 		
@@ -21,23 +21,23 @@ class wp_simple_location{
 	}
 	
 	//register the location content type
-	public function register_race_data_post_type(){
+	public function register_horse_data_post_type(){
 		 //Labels for post type
 		 $labels = array(
-            'name'               => 'Race Tables',
-            'singular_name'      => 'Race Details',
-            'menu_name'          => 'Race Details',
-            'name_admin_bar'     => 'Race Detail',
+            'name'               => 'Horse Tables',
+            'singular_name'      => 'Horse Details',
+            'menu_name'          => 'Horse Details',
+            'name_admin_bar'     => 'Horse Detail',
             'add_new'            => 'Add New', 
-            'add_new_item'       => 'Add New Race Table',
-            'new_item'           => 'New Race Table', 
-            'edit_item'          => 'Edit Race',
-            'view_item'          => 'View Race',
-            'all_items'          => 'All Race Tables',
-            'search_items'       => 'Search Races',
-            'parent_item_colon'  => 'Parent Race:', 
-            'not_found'          => 'No Races found.', 
-            'not_found_in_trash' => 'No Races found in Trash.',
+            'add_new_item'       => 'Add New Horse Table',
+            'new_item'           => 'New Horse Table', 
+            'edit_item'          => 'Edit Horse',
+            'view_item'          => 'View Horse',
+            'all_items'          => 'All Horse Tables',
+            'search_items'       => 'Search Horses',
+            'parent_item_colon'  => 'Parent Horse:', 
+            'not_found'          => 'No Horses found.', 
+            'not_found_in_trash' => 'No Horses found in Trash.',
         );
         //arguments for post type
         $args = array(
@@ -53,33 +53,33 @@ class wp_simple_location{
             'menu_position'     => 20,
             'show_in_admin_bar' => true,
             'menu_icon'         => 'dashicons-location-alt',
-            'rewrite'			=> array('slug' => 'race_tables', 'with_front' => 'true')
+            'rewrite'			=> array('slug' => 'horse_tables', 'with_front' => 'true')
         );
         //register post type
-        register_post_type('wp_race_tables', $args);
+        register_post_type('wp_horse_tables', $args);
 	}
 
 	//adding meta boxes for the location content type*/
 	public function add_table_meta_boxes(){
 		add_meta_box(
 			'wp_table_meta_box', //id
-			'Race Information', //name
-			array($this,'race_meta_box_display'), //display function
-			'wp_race_tables', //post type
+			'Horse Information', //name
+			array($this,'horse_meta_box_display'), //display function
+			'wp_horse_tables', //post type
 			'normal', //location
 			'default' //priority
         );
         add_meta_box(
 			'wp_fetch_form_meta_box', //id
-			'Fetch Race Information From Url', //name
-			array($this,'race_fetch_form_meta_box_display'), //display function
-			'wp_race_tables', //post type
+			'Fetch Horse Information From Url', //name
+			array($this,'horse_fetch_form_meta_box_display'), //display function
+			'wp_horse_tables', //post type
 			'normal', //location
 			'high' //priority
 		);
     }
     
-    public function race_fetch_form_meta_box_display($post){
+    public function horse_fetch_form_meta_box_display($post){
         $fetch_url = $post->filter == 'edit' ? get_post_meta($post->ID,'fetch_url',true): '';
     ?>
 	    <div class="field-container">
@@ -95,7 +95,7 @@ class wp_simple_location{
     <?php }
 	
 	//display function used for our custom location meta box*/
-	public function race_meta_box_display($post){
+	public function horse_meta_box_display($post){
 		//set nonce field
         wp_nonce_field('wp_race_nonce', 'wp_race_nonce_field');
 
@@ -194,7 +194,7 @@ class wp_simple_location{
 	}
 	
 	//triggered when adding or editing a location
-	public function save_race_tables($post_id){
+	public function save_horse_tables($post_id){
 
 		//check for nonce
 		if(!isset($_POST['wp_race_nonce_field'])){
@@ -248,13 +248,13 @@ class wp_simple_location{
         }
         update_post_meta($post_id, 'totalRows', $_POST['totalRows']);
         update_post_meta($post_id, 'fetch_url', $_POST['fetch_url']);
-        do_action('wp_race_tables_admin_save',$post_id);
+        do_action('wp_horse_tables_admin_save',$post_id);
 	}
 	
 	//enqueus scripts and stles on the back end
 	public function enqueue_admin_scripts_and_styles(){
-		wp_enqueue_style('wp_race_tables_admin_styles', plugin_dir_url(__FILE__) . 'css/wp_racing_admin_styles.css');
-		wp_enqueue_script('wp_race_tables_admin_scripts', plugin_dir_url(__FILE__) . 'js/wp_racing_admin.js');
+		wp_enqueue_style('wp_horse_tables_admin_styles', plugin_dir_url(__FILE__) . 'css/wp_racing_admin_styles.css');
+		wp_enqueue_script('wp_horse_tables_admin_scripts', plugin_dir_url(__FILE__) . 'js/wp_racing_admin.js');
     }
     
     //triggered on activation of the plugin (called only once)
@@ -270,6 +270,6 @@ class wp_simple_location{
 	}
 	
 }
-$wp_simple_locations = new wp_simple_location;
+$wp_simple_horses = new wp_simple_horse;
 
 ?>
