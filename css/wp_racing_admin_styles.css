@@ -37,3 +37,42 @@ span#UrlError {
 span.hide{
 	display: none !important;
 }
+div#raceStatusTable .field {
+    width: 9%;
+    float: left;
+}
+
+div#raceStatusTable {
+    width: 100%;
+    float: left;
+}
+
+div#wp_table_meta_box {
+    width: 100%;
+    float: left;
+}
+
+div#raceStatusTable .field:nth-child(1)   {  margin-bottom: 0px !important;  }
+div#raceStatusTable .field:nth-child(12)   {  margin-bottom: 0px !important;  }
+div#raceStatusTable .field:nth-child(23)   {  margin-bottom: 0px !important;  }
+div#raceStatusTable .field:nth-child(34)   {  margin-bottom: 0px !important;  }
+div#raceStatusTable .field:nth-child(45)   {  margin-bottom: 0px !important;  }
+
+div#raceStatusTable .field label {
+    display: none;
+}
+
+div#raceStatusTable .field:nth-child(1) label { display: block !important;}
+div#raceStatusTable .field:nth-child(2) label { display: block !important;}
+div#raceStatusTable .field:nth-child(3) label { display: block !important;}
+div#raceStatusTable .field:nth-child(4) label { display: block !important;}
+div#raceStatusTable .field:nth-child(5) label { display: block !important;}
+div#raceStatusTable .field:nth-child(6) label { display: block !important;}
+div#raceStatusTable .field:nth-child(7) label { display: block !important;}
+div#raceStatusTable .field:nth-child(8) label { display: block !important;}
+div#raceStatusTable .field:nth-child(9) label { display: block !important;}
+div#raceStatusTable .field:nth-child(10) label { display: block !important;}
+div#raceStatusTable .field:nth-child(11) label { display: block !important;}
+div#raceStatusTable .field:nth-child(56) {
+    margin-bottom: 0px !important;
+}
